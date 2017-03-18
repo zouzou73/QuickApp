@@ -39,9 +39,10 @@ import { GroupByPipe } from './pipes/group-by.pipe';
 import { AppComponent } from "./components/app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { HomeComponent } from "./components/home/home.component";
-import { CustomersComponent } from "./components/customers/customers.component";
-import { ProductsComponent } from "./components/products/products.component";
-import { OrdersComponent } from "./components/orders/orders.component";
+import { AppointmentsComponent } from "./components/appointments/appointments.component";
+import { ConsultationsComponent } from "./components/consultations/consultations.component";
+import { PatientsComponent } from "./components/patients/patients.component";
+import { ProvidersComponent } from "./components/providers/providers.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { UserInfoComponent } from "./components/settings/controls/user-info.component";
 import { UserPreferencesComponent } from "./components/settings/controls/user-preferences.component";
@@ -74,9 +75,10 @@ import { BannerDemoComponent } from "./components/controls/banner-demo.component
         AppComponent,
         LoginComponent,
         HomeComponent,
-        CustomersComponent,
-        ProductsComponent,
-        OrdersComponent,
+        AppointmentsComponent,
+        ConsultationsComponent,
+        PatientsComponent,
+        ProvidersComponent,
         SettingsComponent, UserInfoComponent, UserPreferencesComponent, UsersManagementComponent, RolesManagementComponent, RoleEditorComponent,
         AboutComponent,
         NotFoundComponent,

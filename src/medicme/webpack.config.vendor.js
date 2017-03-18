@@ -40,6 +40,8 @@ module.exports = (env) => {
                 'jquery',
                 'zone.js',
                 '@swimlane/ngx-datatable/release/assets/icons.css',
+                //'primeng/resources/themes/omega/theme.css',
+                //'primeng/resources/primeng.min.css',
                 'bootstrap-vertical-tabs/bootstrap.vertical-tabs.css',
                 'bootstrap-toggle/css/bootstrap-toggle.css',
                 'bootstrap-toggle/js/bootstrap-toggle.js',

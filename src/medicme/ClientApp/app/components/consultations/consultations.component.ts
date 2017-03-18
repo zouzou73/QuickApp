@@ -7,11 +7,13 @@
 import { Component } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 
+
 @Component({
-    selector: 'products',
-    templateUrl: './products.component.html',
-    styleUrls: ['./products.component.css'],
+    selector: 'consultations',
+    templateUrl: './consultations.component.html',
+    styleUrls: ['./consultations.component.css'],
     animations: [fadeInOut]
 })
-export class ProductsComponent {
+export class ConsultationsComponent {
+
 }

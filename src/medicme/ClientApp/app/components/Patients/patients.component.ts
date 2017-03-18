@@ -8,10 +8,10 @@ import { Component } from '@angular/core';
 import { fadeInOut } from '../../services/animations';
 
 @Component({
-    selector: 'orders',
-    templateUrl: './orders.component.html',
-    styleUrls: ['./orders.component.css'],
+    selector: 'patients',
+    templateUrl: './patients.component.html',
+    styleUrls: ['./patients.component.css'],
     animations: [fadeInOut]
 })
-export class OrdersComponent {
+export class PatientsComponent {
 }

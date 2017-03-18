@@ -9,11 +9,11 @@ import { fadeInOut } from '../../services/animations';
 
 
 @Component({
-    selector: 'customers',
-    templateUrl: './customers.component.html',
-    styleUrls: ['./customers.component.css'],
+    selector: 'appointments',
+    templateUrl: './appointments.component.html',
+    styleUrls: ['./appointments.component.css'],
     animations: [fadeInOut]
 })
-export class CustomersComponent {
+export class AppointmentsComponent {
 
 }
