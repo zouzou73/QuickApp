@@ -1,8 +1,8 @@
-# **QuickApp** - ASPNET Core / Angular2 startup project template
+# **medicme** - Medical Management System
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/emonney/QuickApp/blob/master/LICENSE)
 
-A startup **Angular2 / ASP.NET Core** (cross-platform ) **project template** with an end-to-end user and role management implementation.
-As well as other common functionalities for Quick Application development.
+Medical Management System built with ASP.NET Core and Angular2
+
 
 Download [demo](https://github.com/emonney/tempa/raw/master/QuickApp-PublishOutput.zip)
 
