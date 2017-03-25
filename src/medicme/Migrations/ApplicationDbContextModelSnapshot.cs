@@ -1,10 +1,4 @@
-﻿// ======================================
-// Author: Ebenezer Monney
-// Email:  info@ebenmonney.com
-// Copyright (c) 2017 www.ebenmonney.com
-// ======================================
-
-using System;
+﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -106,12 +100,92 @@ namespace medicme.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DAL.Models.Customer", b =>
+            modelBuilder.Entity("DAL.Models.Appointement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AppAppointements");
+                });
+
+            modelBuilder.Entity("DAL.Models.Consultaion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comments");
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<int>("DocId");
+
+                    b.Property<int>("PatientId");
+
+                    b.Property<int?>("PraticienId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("PraticienId");
+
+                    b.ToTable("AppConsultations");
+                });
+
+            modelBuilder.Entity("DAL.Models.Patient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Address");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("City")
+                        .HasMaxLength(50);
+
+                    b.Property<DateTime>("DateCreated");
+
+                    b.Property<DateTime>("DateModified");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100);
+
+                    b.Property<int>("Gender");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(30)
+                        .IsUnicode(false);
+
+                    b.Property<int?>("ProviderId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("Name");
+
+                    b.HasIndex("ProviderId");
+
+                    b.ToTable("AppPatients");
+                });
+
+            modelBuilder.Entity("DAL.Models.Provider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("ApplicationUserId");
 
                     b.Property<string>("City")
                         .HasMaxLength(50);
@@ -135,128 +209,11 @@ namespace medicme.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Name");
-
-                    b.ToTable("AppCustomers");
-                });
-
-            modelBuilder.Entity("DAL.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CashierId");
-
-                    b.Property<string>("Comments")
-                        .HasMaxLength(500);
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<decimal>("Discount");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CashierId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("AppOrders");
-                });
-
-            modelBuilder.Entity("DAL.Models.OrderDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("Discount");
-
-                    b.Property<int>("OrderId");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.Property<decimal>("UnitPrice");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("AppOrderDetails");
-                });
-
-            modelBuilder.Entity("DAL.Models.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("BuyingPrice");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Icon")
-                        .HasMaxLength(256)
-                        .IsUnicode(false);
-
-                    b.Property<bool>("IsActive");
-
-                    b.Property<bool>("IsDiscontinued");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.Property<int?>("ParentId");
-
-                    b.Property<int>("ProductCategoryId");
-
-                    b.Property<decimal>("SellingPrice");
-
-                    b.Property<int>("UnitsInStock");
-
-                    b.HasKey("Id");
+                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("Name");
 
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("ProductCategoryId");
-
-                    b.ToTable("AppProducts");
-                });
-
-            modelBuilder.Entity("DAL.Models.ProductCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500);
-
-                    b.Property<string>("Icon");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppProductCategories");
+                    b.ToTable("AppProviders");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -420,41 +377,34 @@ namespace medicme.Migrations
                     b.ToTable("OpenIddictTokens");
                 });
 
-            modelBuilder.Entity("DAL.Models.Order", b =>
+            modelBuilder.Entity("DAL.Models.Consultaion", b =>
                 {
-                    b.HasOne("DAL.Models.ApplicationUser", "Cashier")
-                        .WithMany("Orders")
-                        .HasForeignKey("CashierId");
-
-                    b.HasOne("DAL.Models.Customer", "Customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("CustomerId")
+                    b.HasOne("DAL.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("DAL.Models.Provider", "Praticien")
+                        .WithMany()
+                        .HasForeignKey("PraticienId");
                 });
 
-            modelBuilder.Entity("DAL.Models.OrderDetail", b =>
+            modelBuilder.Entity("DAL.Models.Patient", b =>
                 {
-                    b.HasOne("DAL.Models.Order", "Order")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("DAL.Models.ApplicationUser")
+                        .WithMany("Patients")
+                        .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("DAL.Models.Product", "Product")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("DAL.Models.Provider")
+                        .WithMany("Patients")
+                        .HasForeignKey("ProviderId");
                 });
 
-            modelBuilder.Entity("DAL.Models.Product", b =>
+            modelBuilder.Entity("DAL.Models.Provider", b =>
                 {
-                    b.HasOne("DAL.Models.Product", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.HasOne("DAL.Models.ProductCategory", "ProductCategory")
-                        .WithMany("Products")
-                        .HasForeignKey("ProductCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("DAL.Models.ApplicationUser")
+                        .WithMany("Orders")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

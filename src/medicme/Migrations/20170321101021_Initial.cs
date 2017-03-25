@@ -1,10 +1,4 @@
-﻿// ======================================
-// Author: Ebenezer Monney
-// Email:  info@ebenmonney.com
-// Copyright (c) 2017 www.ebenmonney.com
-// ======================================
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
@@ -60,40 +54,16 @@ namespace medicme.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppCustomers",
+                name: "AppAppointements",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Address = table.Column<string>(nullable: true),
-                    City = table.Column<string>(maxLength: 50, nullable: true),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(maxLength: 100, nullable: true),
-                    Gender = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    PhoneNumber = table.Column<string>(unicode: false, maxLength: 30, nullable: true)
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppCustomers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppProductCategories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 500, nullable: true),
-                    Icon = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(maxLength: 100, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppProductCategories", x => x.Id);
+                    table.PrimaryKey("PK_AppAppointements", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,6 +128,33 @@ namespace medicme.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppProviders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Address = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    City = table.Column<string>(maxLength: 50, nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(unicode: false, maxLength: 30, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppProviders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppProviders_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,72 +223,6 @@ namespace medicme.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppOrders",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CashierId = table.Column<string>(nullable: true),
-                    Comments = table.Column<string>(maxLength: 500, nullable: true),
-                    CustomerId = table.Column<int>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Discount = table.Column<decimal>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppOrders", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppOrders_AspNetUsers_CashierId",
-                        column: x => x.CashierId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AppOrders_AppCustomers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "AppCustomers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AppProducts",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    BuyingPrice = table.Column<decimal>(nullable: false),
-                    DateCreated = table.Column<DateTime>(nullable: false),
-                    DateModified = table.Column<DateTime>(nullable: false),
-                    Description = table.Column<string>(maxLength: 500, nullable: true),
-                    Icon = table.Column<string>(unicode: false, maxLength: 256, nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    IsDiscontinued = table.Column<bool>(nullable: false),
-                    Name = table.Column<string>(maxLength: 100, nullable: false),
-                    ParentId = table.Column<int>(nullable: true),
-                    ProductCategoryId = table.Column<int>(nullable: false),
-                    SellingPrice = table.Column<decimal>(nullable: false),
-                    UnitsInStock = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AppProducts", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AppProducts_AppProducts_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "AppProducts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_AppProducts_AppProductCategories_ProductCategoryId",
-                        column: x => x.ProductCategoryId,
-                        principalTable: "AppProductCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "OpenIddictAuthorizations",
                 columns: table => new
                 {
@@ -312,32 +243,37 @@ namespace medicme.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AppOrderDetails",
+                name: "AppPatients",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Discount = table.Column<decimal>(nullable: false),
-                    OrderId = table.Column<int>(nullable: false),
-                    ProductId = table.Column<int>(nullable: false),
-                    Quantity = table.Column<int>(nullable: false),
-                    UnitPrice = table.Column<decimal>(nullable: false)
+                    Address = table.Column<string>(nullable: true),
+                    ApplicationUserId = table.Column<string>(nullable: true),
+                    City = table.Column<string>(maxLength: 50, nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DateModified = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(maxLength: 100, nullable: true),
+                    Gender = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(unicode: false, maxLength: 30, nullable: true),
+                    ProviderId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AppOrderDetails", x => x.Id);
+                    table.PrimaryKey("PK_AppPatients", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AppOrderDetails_AppOrders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "AppOrders",
+                        name: "FK_AppPatients_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AppOrderDetails_AppProducts_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "AppProducts",
+                        name: "FK_AppPatients_AppProviders_ProviderId",
+                        column: x => x.ProviderId,
+                        principalTable: "AppProviders",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -367,6 +303,35 @@ namespace medicme.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "AppConsultations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Comments = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false),
+                    DocId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false),
+                    PraticienId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppConsultations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AppConsultations_AppPatients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "AppPatients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AppConsultations_AppProviders_PraticienId",
+                        column: x => x.PraticienId,
+                        principalTable: "AppProviders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
@@ -385,44 +350,39 @@ namespace medicme.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppCustomers_Name",
-                table: "AppCustomers",
+                name: "IX_AppConsultations_PatientId",
+                table: "AppConsultations",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppConsultations_PraticienId",
+                table: "AppConsultations",
+                column: "PraticienId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPatients_ApplicationUserId",
+                table: "AppPatients",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AppPatients_Name",
+                table: "AppPatients",
                 column: "Name");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppOrders_CashierId",
-                table: "AppOrders",
-                column: "CashierId");
+                name: "IX_AppPatients_ProviderId",
+                table: "AppPatients",
+                column: "ProviderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppOrders_CustomerId",
-                table: "AppOrders",
-                column: "CustomerId");
+                name: "IX_AppProviders_ApplicationUserId",
+                table: "AppProviders",
+                column: "ApplicationUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AppOrderDetails_OrderId",
-                table: "AppOrderDetails",
-                column: "OrderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppOrderDetails_ProductId",
-                table: "AppOrderDetails",
-                column: "ProductId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppProducts_Name",
-                table: "AppProducts",
+                name: "IX_AppProviders_Name",
+                table: "AppProviders",
                 column: "Name");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppProducts_ParentId",
-                table: "AppProducts",
-                column: "ParentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AppProducts_ProductCategoryId",
-                table: "AppProducts",
-                column: "ProductCategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -469,7 +429,10 @@ namespace medicme.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AppOrderDetails");
+                name: "AppAppointements");
+
+            migrationBuilder.DropTable(
+                name: "AppConsultations");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -493,10 +456,7 @@ namespace medicme.Migrations
                 name: "OpenIddictTokens");
 
             migrationBuilder.DropTable(
-                name: "AppOrders");
-
-            migrationBuilder.DropTable(
-                name: "AppProducts");
+                name: "AppPatients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -505,16 +465,13 @@ namespace medicme.Migrations
                 name: "OpenIddictAuthorizations");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "AppCustomers");
-
-            migrationBuilder.DropTable(
-                name: "AppProductCategories");
+                name: "AppProviders");
 
             migrationBuilder.DropTable(
                 name: "OpenIddictApplications");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

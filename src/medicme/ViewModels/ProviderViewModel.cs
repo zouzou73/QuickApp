@@ -4,16 +4,17 @@
 // Copyright (c) 2017 www.ebenmonney.com
 // ======================================
 
-using DAL.Core;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL.Models
+
+namespace medicme.ViewModels
 {
-    public class Customer
+    public class ProviderViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -21,11 +22,20 @@ namespace DAL.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
-        public Gender Gender { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
+        public string Gender { get; set; }
+
+   
+    }
 
 
-        public ICollection<Order> Orders { get; set; }
+
+
+    public class ProviderViewModelValidator : AbstractValidator<ProviderViewModel>
+    {
+        public ProviderViewModelValidator()
+        {
+            RuleFor(register => register.Name).NotEmpty().WithMessage("Provider name cannot be empty");
+            RuleFor(register => register.Gender).NotEmpty().WithMessage("Gender cannot be empty");
+        }
     }
 }

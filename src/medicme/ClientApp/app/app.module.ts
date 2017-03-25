@@ -40,6 +40,8 @@ import { AppComponent } from "./components/app.component";
 import { LoginComponent } from "./components/login/login.component";
 import { HomeComponent } from "./components/home/home.component";
 import { AppointmentsComponent } from "./components/appointments/appointments.component";
+import { labsComponent } from "./components/lab/labs.component";
+
 import { ConsultationsComponent } from "./components/consultations/consultations.component";
 import { PatientsComponent } from "./components/patients/patients.component";
 import { ProvidersComponent } from "./components/providers/providers.component";
@@ -55,12 +57,15 @@ import { SearchBoxComponent } from "./components/controls/search-box.component";
 import { StatisticsDemoComponent } from "./components/controls/statistics-demo.component";
 import { TodoDemoComponent } from "./components/controls/todo-demo.component";
 import { BannerDemoComponent } from "./components/controls/banner-demo.component";
-
+import { AccordionModule } from 'primeng/components/accordion/accordion';
+import { MenuItem } from 'primeng/components/common/api';
 
 @NgModule({
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         FormsModule,
+        AccordionModule,
+       
         AppRoutingModule,
         NgxDatatableModule,
         ToastyModule.forRoot(),
@@ -76,6 +81,7 @@ import { BannerDemoComponent } from "./components/controls/banner-demo.component
         LoginComponent,
         HomeComponent,
         AppointmentsComponent,
+        labsComponent,
         ConsultationsComponent,
         PatientsComponent,
         ProvidersComponent,
@@ -99,8 +105,10 @@ import { BannerDemoComponent } from "./components/controls/banner-demo.component
         AppTitleService,
         AccountService,
         LocalStoreManager,
-        EndpointFactory
+        EndpointFactory,
+        
     ],
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }

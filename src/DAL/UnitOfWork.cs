@@ -18,10 +18,11 @@ namespace DAL
     {
         readonly ApplicationDbContext _context;
 
-        ICustomerRepository _customers;
-        IProductRepository _products;
-        IOrdersRepository _orders;
-
+        IPatientRepository _patients;
+        IAppointementRepository _appointements;
+        IProviderRepository _providers;
+        IConsultationRepository _Consultations; 
+        ILaborantinRepository _Laborantins;
 
 
         public UnitOfWork(ApplicationDbContext context)
@@ -29,42 +30,61 @@ namespace DAL
             _context = context;
         }
 
-
-
-        public ICustomerRepository Customers
+        public IConsultationRepository Consultations
         {
             get
             {
-                if (_customers == null)
-                    _customers = new CustomerRepository(_context);
+                if (_Consultations == null)
+                    _Consultations = new ConsultationRepository(_context);
 
-                return _customers;
+                return _Consultations;
+            }
+        }
+        public ILaborantinRepository Laborantins
+        {
+            get
+            {
+                if (_Laborantins == null)
+                    _Laborantins = new LaborantinRepository(_context);
+
+                return _Laborantins;
+            }
+        }
+
+        public IPatientRepository Patients
+        {
+            get
+            {
+                if (_patients == null)
+                    _patients = new PatientRepository(_context);
+
+                return _patients;
             }
         }
 
 
 
-        public IProductRepository Products
+        public IAppointementRepository Appointements
         {
             get
             {
-                if (_products == null)
-                    _products = new ProductRepository(_context);
+                if (_appointements == null)
+                    _appointements = new AppointementRepository(_context);
 
-                return _products;
+                return _appointements;
             }
         }
 
 
 
-        public IOrdersRepository Orders
+        public IProviderRepository Providers
         {
             get
             {
-                if (_orders == null)
-                    _orders = new OrdersRepository(_context);
+                if (_providers == null)
+                    _providers = new ProviderRepository(_context);
 
-                return _orders;
+                return _providers;
             }
         }
 

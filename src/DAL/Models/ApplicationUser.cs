@@ -21,6 +21,7 @@ namespace DAL.Models
         public bool IsEnabled { get; set; }
         public bool IsLockedOut { get { return this.LockoutEnabled && this.LockoutEnd >= DateTimeOffset.UtcNow; } }
 
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<Provider> Orders { get; set; }
+        public ICollection<Patient> Patients { get; set; }
     }
 }

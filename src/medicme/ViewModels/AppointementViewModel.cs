@@ -10,10 +10,9 @@ using System.Linq;
 
 namespace medicme.ViewModels
 {
-    public class OrderViewModel
+    public class AppointementViewModel
     {
         public int Id { get; set; }
-        public decimal Discount { get; set; }
-        public string Comments { get; set; }
+        
     }
 }

@@ -18,12 +18,12 @@ namespace medicme.Controllers
 {
     //[Route("api/[controller]/[action]")]
     [Route("api/[controller]")]
-    public class CustomerController : Controller
+    public class PatientController : Controller
     {
         private IUnitOfWork _unitOfWork;
 
 
-        public CustomerController(IUnitOfWork unitOfWork)
+        public PatientController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -32,13 +32,13 @@ namespace medicme.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var allCustomers = _unitOfWork.Customers.GetAllCustomersData();
-            return Ok(Mapper.Map<IEnumerable<CustomerViewModel>>(allCustomers));
+            var allPatients = _unitOfWork.Patients.GetAllPatientsData();
+            return Ok(Mapper.Map<IEnumerable<PatientViewModel>>(allPatients));
         }
 
 
         [HttpGet("throw")]
-        public IEnumerable<CustomerViewModel> Throw()
+        public IEnumerable<PatientViewModel> Throw()
         {
             throw new InvalidOperationException("This is a test exception: " + DateTime.Now);
         }

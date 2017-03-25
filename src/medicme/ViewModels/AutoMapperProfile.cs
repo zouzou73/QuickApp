@@ -47,14 +47,18 @@ namespace medicme.ViewModels
             CreateMap<IdentityRoleClaim<string>, PermissionViewModel>()
                 .ConvertUsing(s => Mapper.Map<PermissionViewModel>(ApplicationPermissions.GetPermissionByValue(s.ClaimValue)));
 
-            CreateMap<Customer, CustomerViewModel>()
+            CreateMap<Patient, PatientViewModel>()
+           .ReverseMap();
+            CreateMap<Provider, ProviderViewModel>()
+                    .ReverseMap();
+
+            CreateMap<Consultation, ConsultationViewModel>()
+                   .ReverseMap();
+            CreateMap<Appointement, AppointementViewModel>()
+                   .ReverseMap();
+            CreateMap<Laborantin, LaborantinViewModel>()
                 .ReverseMap();
 
-            CreateMap<Product, ProductViewModel>()
-                .ReverseMap();
-
-            CreateMap<Order, OrderViewModel>()
-                .ReverseMap();
         }
     }
 }

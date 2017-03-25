@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace medicme.ViewModels
 {
-    public class CustomerViewModel
+    public class PatientViewModel
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -24,17 +24,17 @@ namespace medicme.ViewModels
         public string City { get; set; }
         public string Gender { get; set; }
 
-        public ICollection<OrderViewModel> Orders { get; set; }
+   
     }
 
 
 
 
-    public class CustomerViewModelValidator : AbstractValidator<CustomerViewModel>
+    public class PatientViewModelValidator : AbstractValidator<PatientViewModel>
     {
-        public CustomerViewModelValidator()
+        public PatientViewModelValidator()
         {
-            RuleFor(register => register.Name).NotEmpty().WithMessage("Customer name cannot be empty");
+            RuleFor(register => register.Name).NotEmpty().WithMessage("Patient name cannot be empty");
             RuleFor(register => register.Gender).NotEmpty().WithMessage("Gender cannot be empty");
         }
     }

@@ -208,7 +208,7 @@ namespace DAL.Core
 
         public async Task<bool> TestCanDeleteUserAsync(string userId)
         {
-            bool canDelete = !await _context.Orders.Where(o => o.CashierId == userId).AnyAsync();
+            bool canDelete = !await _context.Appointements.AnyAsync();
 
             if (!canDelete)
                 return canDelete;

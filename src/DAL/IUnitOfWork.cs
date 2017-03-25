@@ -15,11 +15,12 @@ namespace DAL
 {
     public interface IUnitOfWork
     {
-        ICustomerRepository Customers { get; }
-        IProductRepository Products { get; }
-        IOrdersRepository Orders { get; }
-
-
+        ILaborantinRepository Laborantins { get; }
+        IPatientRepository Patients { get; }
+        IAppointementRepository Appointements { get; }
+        IConsultationRepository Consultations { get; }
+        IProviderRepository Providers { get; }
+        
         int SaveChanges();
     }
 }
