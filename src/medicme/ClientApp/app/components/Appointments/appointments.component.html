@@ -4,9 +4,104 @@
     
     </header>
 
-
-    <div [@fadeInOut]>
+   <div [@fadeInOut]>
         <!---- Sample Page Content ---->
+        <div fullcalendarScheduler></div>
     </div>
+
+
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            {{pageTitle}}
+        </div>
+    </div>
+    <nav class="navbar navbar-default">
+        <div class="nav nav-justified navbar-nav">
+
+            <form class="navbar-form navbar-search" role="search">
+                <div class="input-group">
+
+                    <input type="text" class="form-control">
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-search btn-danger">
+                            <span class="glyphicon glyphicon-search"></span>
+                            <span class="label-icon">Search</span>
+                        </button>
+                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-user"></span>
+                                    <span class="label-icon">Search By User</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    <span class="label-icon">Search By Organization</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </nav>
+ 
+    <div class='table-responsive'>
+        <table class='table' *ngIf='doctors && doctors.length'>
+            <thead>
+                <tr>
+                    <th>
+                        <button class='btn btn-primary' (click)='toggleImage()'>
+                            {{showImage ? 'Hide' : 'Show'}} Image
+                        </button>
+                    </th>
+                    <th>DoctorName</th>
+                    <th>Doctor Speciality</th>
+                    <th>Address</th>
+                    <th>PhoneNumber</th>
+                    <th>5 Star Rating</th>
+                    <th> Book Appointement</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let doctor of doctors'>
+                    <td>
+                        <img *ngIf='showImage'
+                             [src]='doctor.imageUrl'
+                             [title]='doctor.dotorName'
+                             [style.width.px]='imageWidth'
+                             [style.margin.px]='imageMargin'>
+                    </td>
+                    <td>
+
+                        {{doctor.doctorName}}
+
+                    </td>
+                    <td>{{ doctor.doctorSpeciality }}</td>
+                    <td>{{ doctor.address }}</td>
+                    <td>{{ doctor.phoneNumber }}</td>
+                        <td>
+                        {{ doctor.starRating }}
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary">
+                              
+                           
+                           Take Appoinetement
+                        </button>
+                    </td>
+</tr>
+            </tbody>
+        </table>
+    </div>
+
+
+  
 </div>
 

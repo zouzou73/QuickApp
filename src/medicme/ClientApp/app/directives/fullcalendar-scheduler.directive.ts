@@ -4,84 +4,51 @@
 // Copyright (c) 2017 www.ebenmonney.com
 // ======================================
 
-import { Directive, Attribute, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Directive, Attribute, ElementRef, Input, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import 'bootstrap-select/dist/js/bootstrap-select';
+import 'fullcalendar/dist/fullcalendar.js' ;
 
 
 
 @Directive({
-    selector: '[fullcalendarScheduler]',
-    exportAs: 'fullcalendar-scheduler'
+    selector: '[fullcalendarScheduler]'
 })
-export class FullcalendarSchedulerDirective implements OnInit, OnDestroy {
-
-    @Input()
-    required: string;
-
-    @Input()
-    set ngModel(values: string | string[]) {
-        setTimeout(() => this.selected = values);
-    }
-
-
+export class FullcalendarSchedulerDirective implements OnInit {
     constructor(private el: ElementRef) {
 
     }
 
-
     ngOnInit() {
-        (<any>$(this.el.nativeElement)).selectpicker();
+        (<any>$(this.el.nativeElement)).fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,week,basicDay,listDay'
+            },
+            resources: [
+                { id: 'a', title: 'Room A' },
+                { id: 'b', title: 'Room B' },
+                { id: 'c', title: 'Room C' },
+                { id: 'd', title: 'Room D' }
+            ],
+            events: [
+                {
+                    title: 'event1',
+                    start: '2017-01-01'
+                },
+                {
+                    title: 'event2',
+                    start: '2017-01-05',
+                    end: '2017-01-07'
+                },
+                {
+                    title: 'event3',
+                    start: '2017-01-09T12:30:00',
+                    allDay: false // will make the time show
+                }
+               
+            ],
 
-        if (this.requiredAttribute)
-            (<any>$(this.el.nativeElement)).selectpicker('setStyle', 'required', 'add');
-
-        setTimeout(() => {
-            this.refresh();
-            this.doValidation();
         });
-
-    }
-
-
-    ngOnDestroy() {
-        (<any>$(this.el.nativeElement)).selectpicker('destroy');
-    }
-
-
-    private doValidation() {
-        if (this.requiredAttribute) {
-            (<any>$(this.el.nativeElement)).selectpicker('setStyle', !this.valid ? 'ng-valid' : 'ng-invalid', 'remove');
-            (<any>$(this.el.nativeElement)).selectpicker('setStyle', this.valid ? 'ng-valid' : 'ng-invalid', 'add');
-        }
-    }
-
-    private get requiredAttribute() {
-        return this.required === "" || this.required == "true";
-    }
-
-
-    refresh() {
-        (<any>$(this.el.nativeElement)).selectpicker('refresh');
-    }
-
-    render() {
-        (<any>$(this.el.nativeElement)).selectpicker('render');
-    }
-
-
-    get valid(): boolean {
-        return this.requiredAttribute ? this.selected.length > 0 : true;
-    }
-
-
-    set selected(values: string | string[]) {
-        (<any>$(this.el.nativeElement)).selectpicker('val', values);
-        this.doValidation();
-    }
-
-    get selected(): string | string[] {
-        return (<any>$(this.el.nativeElement)).selectpicker('val');
     }
 }

@@ -39,9 +39,8 @@ module.exports = (env) => {
                 'event-source-polyfill',
                 'jquery',
                 'zone.js',
+                'fullcalendar/dist/fullcalendar.css',
                 '@swimlane/ngx-datatable/release/assets/icons.css',
-                //'primeng/resources/themes/omega/theme.css',
-                //'primeng/resources/primeng.min.css',
                 'bootstrap-vertical-tabs/bootstrap.vertical-tabs.css',
                 'bootstrap-toggle/css/bootstrap-toggle.css',
                 'bootstrap-toggle/js/bootstrap-toggle.js',
@@ -58,7 +57,7 @@ module.exports = (env) => {
             library: '[name]_[hash]'
         },
         plugins: [
-            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
+            new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery', moment: 'moment' }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.ContextReplacementPlugin(/\@angular\b.*\b(bundles|linker)/, path.join(__dirname, './ClientApp')), // Workaround for https://github.com/angular/angular/issues/11580
             new webpack.IgnorePlugin(/^vertx$/) // Workaround for https://github.com/stefanpenner/es6-promise/issues/100
         ]

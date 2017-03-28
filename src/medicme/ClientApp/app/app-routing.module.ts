@@ -13,6 +13,7 @@ import { AppointmentsComponent } from "./components/appointments/appointments.co
 import { ConsultationsComponent } from "./components/consultations/consultations.component";
 import { PatientsComponent } from "./components/patients/patients.component";
 import { labsComponent } from "./components/lab/labs.component";
+import { ProductsComponent } from "./components/products/product-list.component";
 import { ProvidersComponent } from "./components/providers/providers.component";
 import { SettingsComponent } from "./components/settings/settings.component";
 import { AboutComponent } from "./components/about/about.component";
@@ -35,6 +36,7 @@ import { AuthGuard } from './services/auth-guard.service';
             { path: "consultations", component: ConsultationsComponent, canActivate: [AuthGuard], data: { title: "Consultations" } },
             { path: "patients", component: PatientsComponent, canActivate: [AuthGuard], data: { title: "Patients" } },
             { path: "labs", component: labsComponent, canActivate: [AuthGuard], data: { title: "Labs" } },
+            { path: "products", component: ProductsComponent, canActivate: [AuthGuard], data: { title: "Products" } },
             { path: "providers", component: ProvidersComponent, canActivate: [AuthGuard], data: { title: "Providers" } },
             { path: "settings", component: SettingsComponent, canActivate: [AuthGuard], data: { title: "Settings" } },
             { path: "about", component: AboutComponent, data: { title: "About Us" } },

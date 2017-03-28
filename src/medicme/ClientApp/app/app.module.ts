@@ -34,6 +34,8 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { BootstrapTabDirective } from './directives/bootstrap-tab.directive';
 import { BootstrapToggleDirective } from './directives/bootstrap-toggle.directive';
 import { BootstrapSelectDirective } from './directives/bootstrap-select.directive';
+import { FullcalendarSchedulerDirective } from './directives/fullcalendar-scheduler.directive';
+
 import { GroupByPipe } from './pipes/group-by.pipe';
 
 import { AppComponent } from "./components/app.component";
@@ -41,6 +43,8 @@ import { LoginComponent } from "./components/login/login.component";
 import { HomeComponent } from "./components/home/home.component";
 import { AppointmentsComponent } from "./components/appointments/appointments.component";
 import { labsComponent } from "./components/lab/labs.component";
+import { ProductsComponent } from "./components/products/product-list.component";
+import { ProductFilterPipe } from "./components/products/product-filter.pipe";
 
 import { ConsultationsComponent } from "./components/consultations/consultations.component";
 import { PatientsComponent } from "./components/patients/patients.component";
@@ -83,14 +87,15 @@ import { MenuItem } from 'primeng/components/common/api';
         AppointmentsComponent,
         labsComponent,
         ConsultationsComponent,
-        PatientsComponent,
-        ProvidersComponent,
+        PatientsComponent,ProductFilterPipe,
+        ProvidersComponent, ProductsComponent,
         SettingsComponent, UserInfoComponent, UserPreferencesComponent, UsersManagementComponent, RolesManagementComponent, RoleEditorComponent,
         AboutComponent,
         NotFoundComponent,
         SearchBoxComponent,
         StatisticsDemoComponent, TodoDemoComponent, BannerDemoComponent,
         EqualValidator,
+        FullcalendarSchedulerDirective,
         LastElementDirective,
         AutofocusDirective,
         BootstrapTabDirective,

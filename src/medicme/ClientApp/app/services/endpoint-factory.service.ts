@@ -18,7 +18,7 @@ import { ConfigurationService } from './configuration.service';
 
 
 @Injectable()
-export class EndpointFactory {
+export class EndpointFactory { 
 
     static readonly apiVersion: string = "1";
 
